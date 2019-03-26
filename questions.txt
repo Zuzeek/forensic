@@ -1,0 +1,48 @@
+# Questions
+
+## What's `stdint.h`?
+It's a header file in the C standard library, to allow programmers to write more portable code by providing a set of typedefs (uint8_t, uint32_t, int32_t, uint16_t) that specify exact-width integer types, together with the defined minimum and maximum allowable values for each type, using macros.
+
+## What's the point of using `uint8_t`, `uint32_t`, `int32_t`, and `uint16_t` in a program?
+* The point of using them is that you know exactly how much space your structs will take up.
+* These functions are a cross-platform implementation of a standard data type:  
+    * uint8_t is an unsigned int of 8 bits. Thus, uint8_t denotes an unsigned integer type with a width of exactly 8 bits.
+    * uint32_t is an unsigned long long. Thus the typedef name int32_t denotes a signed integer type with width 32, no padding bits, and a two's-complement representation.
+    * int32_t is a signed long long. Thus int32_t denotes a signed integer type with a width of exactly 32 bits.
+    * uint16_t is an unsigned 16 bit int. Thus, uint16_t denotes an unsigned integer type with width 16. 
+
+## How many bytes is a `BYTE`, a `DWORD`, a `LONG`, and a `WORD`, respectively?
+BYTE is 8 bit = 1 byte 
+DWORD & LONG are 32 bit = 4 byte 
+WORD is 16 bit = 2 byte 
+
+## What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used t o identify file formats (with high probability) are generally called "magic numbers."
+The first two bytes in ASCII are letters 'B' and 'M', in hexadecimal it is: 0x42 0x4D (0x424D). 
+
+## What's the difference between `bfSize` and `biSize`?
+* biSize > The number of bytes required by the structure. It describes the entire file size in bytes.  
+* bfSize > The size, in bytes, of the bitmap file (BITMAPINFOHEADER). 
+
+## What does it mean if `biHeight` is negative?
+* biHeight > The height of the bitmap, in pixels. 
+* If biHeight is negative, the bitmap is a top-down DIB and its origin is the upper-left corner.
+    * If biHeight is negative, indicating a top-down DIB, biCompression must be either BI_RGB or BI_BITFIELDS. Top-down DIBs cannot be  compressed.
+    * If biCompression is BI_JPEG or BI_PNG, the biHeight member specifies the height of the decompressed JPEG or PNG image file, respectively.
+
+## What field in `BITMAPINFOHEADER` specifies the BMP's color depth (i.e., bits per pixel)?
+biBitCount > The number of bits-per-pixel. 
+
+## Why might `fopen` return `NULL` in lines 24 and 32 of `copy.c`?
+* This might happen if 'fopen' could not find a file or is not able to create a file, a file might not exist.
+
+## Why is the third argument to `fread` always `1` in our code? (For example, see lines 40, 44, and 75.)
+* Because we are trying to get just 1 variable from the file.
+
+ ## What value does line 63 of `copy.c` assign to `padding` if `bi.biWidth` is `3`?
+3
+
+## What does `fseek` do?
+* Allows you rewind or fast forward within a file. 
+
+## What is `SEEK_CUR`?
+* If you want to change the location of the pointer from its current location.  
